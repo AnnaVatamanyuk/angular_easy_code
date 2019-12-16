@@ -1,8 +1,8 @@
 //1. реализовать метод, принимающий строку и возвращающий является ли она палиндромом
 
-function isPalindromeString(str : string) {
-    let i : number;
-    if (str === null)
+function isPalindromeString(str: string) {
+    let i: number;
+    if (!str)
         return false;
     for (i = 0; i < str.length / 2; i++) {
         if (str.charAt(i) !== str.charAt(str.length - i - 1))
@@ -17,14 +17,14 @@ console.log(isPalindromeString('assa'));
 // fn(2) => [1,1]
 // fn(4) => [1,1,2,3]
 
-function fibonacciArray(fibonacciNumber : number) {
-    let i : number;
-    let fibonacci : Array<number> = [];
+function fibonacciArray(fibonacciNumber: number) {
+    let i: number;
+    let fibonacci: Array<number> = [];
     if (fibonacciNumber > 0){
        for (i = 0; i < fibonacciNumber; i++){
            if (fibonacci.length < 2){
                fibonacci.push(1);
-           } else {
+           } else if (fibonacci[i - 1] + fibonacci[i - 2] <= fibonacciNumber){
                fibonacci.push(fibonacci[i - 1] + fibonacci[i - 2]);
            }
        }
@@ -32,4 +32,4 @@ function fibonacciArray(fibonacciNumber : number) {
     }
 }
 
-console.log(fibonacciArray(5));
+console.log(fibonacciArray(10));

@@ -1,0 +1,16 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  font-style: italic;
+  font-size: 18px;
+}
+
+mark{
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 20px;
+  font-style: normal;
+}

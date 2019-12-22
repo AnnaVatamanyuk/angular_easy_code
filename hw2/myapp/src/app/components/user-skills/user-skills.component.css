@@ -1,0 +1,16 @@
+.skills{
+  padding: 30px;
+}
+
+h3{
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 20px;
+  font-style: normal;
+  margin-bottom: 15px;
+}
+
+ul li{
+  margin: 0 30px 5px;
+}
+

@@ -1,0 +1,21 @@
+.contacts{
+  padding: 30px;
+}
+
+table{
+  border: 1px solid gainsboro;
+}
+
+th{
+  border-bottom: 1px solid gainsboro;
+}
+
+th, td{
+  padding: 10px;
+  border-right: 1px solid gainsboro;
+}
+
+th:last-child,
+td:last-child{
+  border-right: none;
+}

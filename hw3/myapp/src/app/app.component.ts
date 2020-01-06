@@ -10,7 +10,7 @@ export class AppComponent {
  todoList: Array<Todo> = [
    {
      id: 1,
-     title: 'lern JavaScript',
+     title: 'learn JavaScript',
      isCompleted: false,
    },
    {
@@ -21,30 +21,59 @@ export class AppComponent {
  ];
 
   taskList: Array<Todo> = this.todoList;
+  currentFilter: string = 'all';
 
-    deleteTodoItem(id){
-   this.todoList =this.todoList.filter(item => item.id !== id);
+  deleteTodoItem(id: number): void{
+   this.todoList = this.todoList.filter((item: Todo) => item.id !== id);
+   this.rebuildList();
  }
 
- onFormSubmit(todo){
-   const newTodo: Todo = {
-     ...todo,
-     isCompleted: false,
-     id: Math.random()
-   };
-   this.todoList.push(newTodo)
+  completeTodoItem(id: number): void{
+    this.todoList = this.todoList.map((item: Todo) => {
+        if (item.id === id) {
+          item.isCompleted = !item.isCompleted;
+        }
+        return item;
+    });
+    this.rebuildList();
+  }
+
+  rebuildList(): void{
+    switch (this.currentFilter) {
+      case 'completed':
+        this.CompletedTasksItems();
+        break;
+      case 'notCompleted':
+        this.NotCompletedTask();
+        break;
+      default:
+        this.AllTasks();
+        break;
+    }
+  }
+
+ onFormSubmit(todo): void{
+    const newTodo: Todo = {
+      ...todo,
+      isCompleted: false,
+      id: Math.random()
+    };
+    this.todoList.push(newTodo);
  }
 
- AllTasks(){
-      this.taskList = this.todoList
+ AllTasks(): void{
+    this.currentFilter = 'all';
+    this.taskList = this.todoList;
  }
 
- CompletedTasksItems(){
-    this.taskList = this.todoList.filter( task => task.isCompleted === true);
+ CompletedTasksItems(): void{
+    this.currentFilter = 'completed';
+    this.taskList = this.todoList.filter( (task: Todo) => task.isCompleted === true);
  }
 
- NotCompletedTask(){
-   this.taskList = this.todoList.filter( task => task.isCompleted === false);
+ NotCompletedTask(): void{
+    this.currentFilter = 'notCompleted';
+    this.taskList = this.todoList.filter( (task: Todo) => task.isCompleted === false);
  }
 
 }

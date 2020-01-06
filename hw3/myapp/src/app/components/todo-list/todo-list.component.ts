@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Todo} from "../../interfaces/Todo";
 
 @Component({
@@ -6,17 +6,17 @@ import {Todo} from "../../interfaces/Todo";
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent implements OnInit {
-@Input() list: Array<Todo>;
-@Output() deleteEvent = new EventEmitter();
+export class TodoListComponent{
+  @Input() list: Array<Todo>;
+  @Output() deleteEvent: EventEmitter<number> = new EventEmitter();
+  @Output() completeEvent: EventEmitter<number> = new EventEmitter();
 
-  constructor() { }
-
-  ngOnInit() {
+  onDeleteItem(id: number): void{
+   this.deleteEvent.emit(id);
   }
 
-  onDeleteItem(id){
-   this.deleteEvent.emit(id)
+  onCompleteItem(id: number): void{
+    this.completeEvent.emit(id);
   }
 
 }

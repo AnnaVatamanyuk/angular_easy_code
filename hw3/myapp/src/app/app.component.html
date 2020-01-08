@@ -1,0 +1,6 @@
+<app-todo-form (submitEvent)="onFormSubmit($event)"></app-todo-form>
+<app-todo-list-filters (filterByCompleted)="CompletedTasksItems()" (filterByAllTasks)="AllTasks()" (filterByNotCompleted)="NotCompletedTask()"></app-todo-list-filters>
+<app-todo-list [list]="taskList"
+  (deleteEvent)="deleteTodoItem($event)"
+  (completeEvent)="completeTodoItem($event)"
+></app-todo-list>

@@ -1,0 +1,18 @@
+.item-completed{
+  background-color: gainsboro;
+}
+
+.item-completed h5{
+  text-decoration:line-through;
+  color: #989898;
+}
+
+.item-completed .btn{
+  opacity: .7;
+}
+.btn-danger:focus,
+.btn-primary:focus{
+  box-shadow:none;
+}
+
+

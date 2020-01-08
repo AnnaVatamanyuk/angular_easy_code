@@ -1,0 +1,10 @@
+<div class="container">
+  <ul class="list-group">
+    <app-todo-list-item
+      *ngFor="let item of list;"
+      [item]="item"
+      (deleteEvent)="onDeleteItem($event)"
+      (completeEvent)="onCompleteItem($event)"
+    ></app-todo-list-item>
+  </ul>
+</div>

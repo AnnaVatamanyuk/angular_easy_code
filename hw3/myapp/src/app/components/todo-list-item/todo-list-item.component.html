@@ -1,0 +1,9 @@
+<li class="list-group-item"
+    [ngClass]="{'item-completed': item.isCompleted}" >
+  <h5>{{item.title}}</h5>
+  <p>{{item.body}}</p>
+  <div class="btn-group">
+    <button class="btn btn-danger" (click)="DeleteItem()">Delete</button>
+    <button class="btn btn-primary" (click)="CompleteItem()">{{buttonText}}</button>
+  </div>
+</li>

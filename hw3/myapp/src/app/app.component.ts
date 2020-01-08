@@ -52,7 +52,7 @@ export class AppComponent {
     }
   }
 
- onFormSubmit(todo): void{
+ onFormSubmit(todo: Todo): void{
     const newTodo: Todo = {
       ...todo,
       isCompleted: false,

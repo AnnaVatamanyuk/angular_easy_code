@@ -1,4 +1,6 @@
 import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Todo } from 'src/app/interfaces/Todo';
 
 @Component({
   selector: 'app-todo-form',
@@ -6,11 +8,11 @@ import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
   styleUrls: ['./todo-form.component.css']
 })
 export class TodoFormComponent{
-  @Output() submitEvent: EventEmitter<object> = new EventEmitter();
-  @ViewChild('mainForm', {static: false}) form;
+  @Output() submitEvent: EventEmitter<Todo> = new EventEmitter();
+  @ViewChild('mainForm', {static: false}) form: NgForm;
   todoForm = {
     title: ''
-  };
+  } as Todo;
 
   onSubmit(): void{
     this.submitEvent.emit({ ...this.todoForm });

@@ -11,7 +11,9 @@
   opacity: .7;
 }
 .btn-danger:focus,
-.btn-primary:focus{
+.btn-primary:focus,
+.btn-info:focus,
+.btn-success:focus{
   box-shadow:none;
 }
 

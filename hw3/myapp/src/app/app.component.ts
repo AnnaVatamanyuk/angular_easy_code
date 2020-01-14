@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Todo} from "./interfaces/Todo";
 
 @Component({
@@ -7,6 +7,7 @@ import {Todo} from "./interfaces/Todo";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @Input() textTask;
  todoList: Array<Todo> = [
    {
      id: 1,
@@ -36,6 +37,18 @@ export class AppComponent {
         return item;
     });
     this.rebuildList();
+  }
+
+  editTodoItem(id: number): void{
+
+  }
+
+  saveTodoItem(itemTask): void{
+    for (let i: number = 0; i < this.taskList.length; i++){
+      if (itemTask.id === this.taskList[i].id){
+        this.taskList[i].body = itemTask.text;
+      }
+    }
   }
 
   rebuildList(): void{

@@ -8,7 +8,6 @@ import { EmptyMsgComponent } from './components/empty-msg/empty-msg.component';
 import { TodoFormComponent } from './components/todo-form/todo-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TodoListFiltersComponent } from './components/todo-list-filters/todo-list-filters.component';
-import { TodoListTextComponent } from './components/todo-list-text/todo-list-text.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +16,7 @@ import { TodoListTextComponent } from './components/todo-list-text/todo-list-tex
     TodoListItemComponent,
     EmptyMsgComponent,
     TodoFormComponent,
-    TodoListFiltersComponent,
-    TodoListTextComponent
+    TodoListFiltersComponent
   ],
     imports: [
         BrowserModule,

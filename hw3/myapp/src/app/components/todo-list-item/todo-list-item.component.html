@@ -2,11 +2,16 @@
     [ngClass]="{'item-completed': item.isCompleted}" >
   <h5>{{item.title}}</h5>
   <p>{{item.body}}</p>
-  <app-todo-list-text  *ngIf="condition" [(textarea)]="textTask">{{item.body}}</app-todo-list-text>
+  <div class="container">
+    <label>
+      <textarea class="list-text" *ngIf="condition" [(ngModel)]="textTask"
+                (change)="onTextareaChange(textTask)">{{item.body}}</textarea>
+    </label>
+  </div>
   <div class="btn-group">
-    <button class="btn btn-danger" (click)="DeleteItem()">Delete</button>
-    <button class="btn btn-primary" (click)="CompleteItem()">{{buttonText}}</button>
-    <button class="btn btn-success" (click)="EditItem()">{{buttonEditText}}</button>
-    <button class="btn btn-info" (click)="SaveItem()" *ngIf="condition">Save</button>
+    <button class="btn btn-danger" (click)="deleteItem()">Delete</button>
+    <button class="btn btn-primary" (click)="completeItem()">{{buttonText}}</button>
+    <button class="btn btn-success" (click)="editItem()">{{buttonEditText}}</button>
+    <button class="btn btn-info" (click)="saveItem()" *ngIf="condition">Save</button>
   </div>
 </li>

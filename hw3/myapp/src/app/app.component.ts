@@ -54,13 +54,13 @@ export class AppComponent {
   rebuildList(): void{
     switch (this.currentFilter) {
       case 'completed':
-        this.CompletedTasksItems();
+        this.completedTasksItems();
         break;
       case 'notCompleted':
-        this.NotCompletedTask();
+        this.notCompletedTask();
         break;
       default:
-        this.AllTasks();
+        this.allTasks();
         break;
     }
   }
@@ -74,17 +74,17 @@ export class AppComponent {
     this.todoList.push(newTodo);
  }
 
- AllTasks(): void{
+ allTasks(): void{
     this.currentFilter = 'all';
     this.taskList = this.todoList;
  }
 
- CompletedTasksItems(): void{
+ completedTasksItems(): void{
     this.currentFilter = 'completed';
     this.taskList = this.todoList.filter( (task: Todo) => task.isCompleted === true);
  }
 
- NotCompletedTask(): void{
+ notCompletedTask(): void{
     this.currentFilter = 'notCompleted';
     this.taskList = this.todoList.filter( (task: Todo) => task.isCompleted === false);
  }

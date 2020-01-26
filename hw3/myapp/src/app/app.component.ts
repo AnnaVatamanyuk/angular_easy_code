@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Todo} from "./interfaces/Todo";
 
 @Component({
@@ -7,6 +7,7 @@ import {Todo} from "./interfaces/Todo";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @Input() textTask;
  todoList: Array<Todo> = [
    {
      id: 1,
@@ -38,16 +39,28 @@ export class AppComponent {
     this.rebuildList();
   }
 
+  editTodoItem(id: number): void{
+
+  }
+
+  saveTodoItem(itemTask): void{
+    for (let i: number = 0; i < this.taskList.length; i++){
+      if (itemTask.id === this.taskList[i].id){
+        this.taskList[i].body = itemTask.text;
+      }
+    }
+  }
+
   rebuildList(): void{
     switch (this.currentFilter) {
       case 'completed':
-        this.CompletedTasksItems();
+        this.completedTasksItems();
         break;
       case 'notCompleted':
-        this.NotCompletedTask();
+        this.notCompletedTask();
         break;
       default:
-        this.AllTasks();
+        this.allTasks();
         break;
     }
   }
@@ -61,17 +74,17 @@ export class AppComponent {
     this.todoList.push(newTodo);
  }
 
- AllTasks(): void{
+ allTasks(): void{
     this.currentFilter = 'all';
     this.taskList = this.todoList;
  }
 
- CompletedTasksItems(): void{
+ completedTasksItems(): void{
     this.currentFilter = 'completed';
     this.taskList = this.todoList.filter( (task: Todo) => task.isCompleted === true);
  }
 
- NotCompletedTask(): void{
+ notCompletedTask(): void{
     this.currentFilter = 'notCompleted';
     this.taskList = this.todoList.filter( (task: Todo) => task.isCompleted === false);
  }

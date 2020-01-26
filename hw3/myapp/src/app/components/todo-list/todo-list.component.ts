@@ -10,6 +10,8 @@ export class TodoListComponent{
   @Input() list: Array<Todo>;
   @Output() deleteEvent: EventEmitter<number> = new EventEmitter();
   @Output() completeEvent: EventEmitter<number> = new EventEmitter();
+  @Output() editEvent: EventEmitter<number> = new EventEmitter();
+  @Output() saveEvent: EventEmitter<object> = new EventEmitter();
 
   onDeleteItem(id: number): void{
    this.deleteEvent.emit(id);
@@ -19,4 +21,11 @@ export class TodoListComponent{
     this.completeEvent.emit(id);
   }
 
+  onEditItem(id: number): void{
+    this.editEvent.emit(id);
+  }
+
+  onSaveItem(itemTask: object): void{
+    this.saveEvent.emit(itemTask);
+  }
 }

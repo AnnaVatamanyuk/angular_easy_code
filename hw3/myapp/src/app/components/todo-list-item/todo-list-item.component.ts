@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Todo} from "../../interfaces/Todo";
+import {TodoServicesService} from "../../services/todo-services.service";
 
 @Component({
   selector: 'app-todo-list-item',
@@ -7,12 +8,13 @@ import {Todo} from "../../interfaces/Todo";
   styleUrls: ['./todo-list-item.component.css']
 })
 export class TodoListItemComponent{
+  constructor(public todoServicesService: TodoServicesService) {
+  }
   @Input() item: Todo;
   @Input() textarea: string;
   @Output() deleteEvent: EventEmitter<number> = new EventEmitter();
   @Output() completeEvent: EventEmitter<number> = new EventEmitter();
   @Output() editEvent: EventEmitter<number> = new EventEmitter();
-  @Output() saveEvent: EventEmitter<object> = new EventEmitter();
 
 
   condition: boolean = false;
@@ -42,6 +44,6 @@ export class TodoListItemComponent{
   saveItem(): void{
     this.buttonEditText = 'Edit';
     this.condition = false;
-    this.saveEvent.emit({id: this.item.id, text: this.textarea});
+    this.todoServicesService.saveTodo(this.item.id, this.textarea);
   }
 }

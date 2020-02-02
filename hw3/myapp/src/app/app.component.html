@@ -2,11 +2,9 @@
 <app-todo-list-filters
   (filterByCompleted)="completedTasksItems()"
   (filterByAllTasks)="allTasks()"
-  (filterByNotCompleted)="notCompletedTask()">
+  (filterByNotCompleted)="notCompletedTaskItems()">
 </app-todo-list-filters>
 <app-todo-list [list]="taskList"
   (deleteEvent)="deleteTodoItem($event)"
   (completeEvent)="completeTodoItem($event)"
-  (editEvent)="editTodoItem($event)"
-  (saveEvent)="saveTodoItem($event)"
 ></app-todo-list>

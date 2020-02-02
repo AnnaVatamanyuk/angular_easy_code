@@ -1,54 +1,34 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Todo} from "./interfaces/Todo";
+import {TodoServicesService} from "./services/todo-services.service";
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  @Input() textTask;
- todoList: Array<Todo> = [
-   {
-     id: 1,
-     title: 'learn JavaScript',
-     isCompleted: false,
-   },
-   {
-     id: 2,
-     title: 'Learn Angular',
-     isCompleted: true,
-   }
- ];
+export class AppComponent implements OnInit{
+  @Input() textTask: string;
 
-  taskList: Array<Todo> = this.todoList;
+  constructor(private todoServicesService: TodoServicesService ) { }
+
+  taskList: Array<Todo> = [];
   currentFilter: string = 'all';
 
-  deleteTodoItem(id: number): void{
-   this.todoList = this.todoList.filter((item: Todo) => item.id !== id);
-   this.rebuildList();
- }
-
-  completeTodoItem(id: number): void{
-    this.todoList = this.todoList.map((item: Todo) => {
-        if (item.id === id) {
-          item.isCompleted = !item.isCompleted;
-        }
-        return item;
-    });
+  ngOnInit(){
     this.rebuildList();
   }
 
-  editTodoItem(id: number): void{
-
-  }
-
-  saveTodoItem(itemTask): void{
-    for (let i: number = 0; i < this.taskList.length; i++){
-      if (itemTask.id === this.taskList[i].id){
-        this.taskList[i].body = itemTask.text;
-      }
+  deleteTodoItem(id: number): void{
+    if (this.todoServicesService.deleteTodoItem(id)) {
+      this.rebuildList();
     }
+ }
+
+  completeTodoItem(id: number): void {
+    this.todoServicesService.getCompleteTodoItem(id);
+    this.rebuildList();
   }
 
   rebuildList(): void{
@@ -57,7 +37,7 @@ export class AppComponent {
         this.completedTasksItems();
         break;
       case 'notCompleted':
-        this.notCompletedTask();
+        this.notCompletedTaskItems();
         break;
       default:
         this.allTasks();
@@ -65,28 +45,36 @@ export class AppComponent {
     }
   }
 
- onFormSubmit(todo: Todo): void{
+ onFormSubmit(todo: Todo): void {
     const newTodo: Todo = {
       ...todo,
       isCompleted: false,
       id: Math.random()
     };
-    this.todoList.push(newTodo);
+    this.taskList.push(newTodo);
  }
 
  allTasks(): void{
     this.currentFilter = 'all';
-    this.taskList = this.todoList;
+    this.todoServicesService.getTasks()
+      .subscribe(
+        item => {
+            this.taskList = item;
+        },
+        (err) => console.log(err),
+        () => console.log('Completed')
+      );
+
  }
 
  completedTasksItems(): void{
     this.currentFilter = 'completed';
-    this.taskList = this.todoList.filter( (task: Todo) => task.isCompleted === true);
+    this.taskList = this.todoServicesService.completedTasks();
  }
 
- notCompletedTask(): void{
+ notCompletedTaskItems(): void{
     this.currentFilter = 'notCompleted';
-    this.taskList = this.todoList.filter( (task: Todo) => task.isCompleted === false);
+    this.taskList = this.todoServicesService.notCompletedTask();
  }
 
 }

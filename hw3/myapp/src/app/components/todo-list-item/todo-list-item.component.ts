@@ -8,7 +8,7 @@ import {TodoServicesService} from "../../services/todo-services.service";
   styleUrls: ['./todo-list-item.component.css']
 })
 export class TodoListItemComponent{
-  constructor(public todoServicesService: TodoServicesService) {
+  constructor(private todoServicesService: TodoServicesService) {
   }
   @Input() item: Todo;
   @Input() textarea: string;
@@ -32,7 +32,7 @@ export class TodoListItemComponent{
 
   completeItem(): void{
     this.buttonText = this.item.isCompleted ? 'Complete' : 'Completed';
-    this.completeEvent.emit(this.item.id)
+    this.completeEvent.emit(this.item.id);
   }
 
   editItem(): void{

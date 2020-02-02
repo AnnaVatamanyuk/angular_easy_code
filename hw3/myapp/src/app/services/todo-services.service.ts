@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TodoServicesService {
-  public todoList: Array<Todo> = [
+  private todoList: Array<Todo> = [
     {
       id: 1,
       title: 'learn JavaScript',
@@ -20,19 +20,11 @@ export class TodoServicesService {
   ];
 
   private itemsObservable: Observable<Array<Todo>> = new Observable((observer) => {
-    setTimeout(() => {
-      if(!this.todoList.length) {
-        return observer.error('TodoList is empty');
-      }
       observer.next(this.todoList);
-      observer.complete()
-    }, 3000);
+      observer.complete();
   });
 
-
-  constructor() { }
-
-  getTasks(){
+  getTasks(): Observable<Array<Todo>>{
     return this.itemsObservable;
   }
 
@@ -49,12 +41,12 @@ export class TodoServicesService {
       }
       return item;
     });
-    return this.todoList
+    return this.todoList;
   }
 
-  addTodoItem(todoForm: object): Array<object>{
-    this.todoList.push(<Todo>todoForm);
-    return this.todoList
+  addTodoItem(todoForm: Todo): Array<object>{
+    this.todoList.push(todoForm);
+    return this.todoList;
   }
 
   saveTodo(id: number, text: string): Array<object>{
@@ -63,7 +55,7 @@ export class TodoServicesService {
         this.todoList[i].body = text;
       }
     }
-    return this.todoList
+    return this.todoList;
   }
 
   completedTasks(): Array<Todo>{

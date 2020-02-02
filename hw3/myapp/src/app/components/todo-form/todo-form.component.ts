@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import {TodoServicesService} from "../../services/todo-services.service";
-import { Todo } from 'src/app/interfaces/Todo';
+import { TodoServicesService } from "../../services/todo-services.service";
 import { NgForm } from '@angular/forms';
+import { Todo } from 'src/app/interfaces/Todo';
 
 @Component({
   selector: 'app-todo-form',
